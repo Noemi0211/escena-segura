@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es" data-tema="oscuro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Escena Segura · Emergencias Sanitarias</title>
+    <meta
+      name="description"
+      content="Recurso educativo interactivo para el Ciclo Formativo de Emergencias Sanitarias: clasifica la emergencia, identifica los riesgos y toma decisiones seguras."
+    />
+    <meta name="author" content="Noemí Celaya Mingot" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0b1620" />
+
+    <!-- El contenido se inyecta desde src/. Este HTML es intencionadamente
+         mínimo: sin plantillas duplicadas, sin lógica embebida. -->
+    <link rel="icon" href="src/assets/icons/icono-app.svg" type="image/svg+xml" />
+
+    <link rel="stylesheet" href="src/styles/tokens.css" />
+    <link rel="stylesheet" href="src/styles/base.css" />
+    <link rel="stylesheet" href="src/styles/layout.css" />
+    <link rel="stylesheet" href="src/styles/components.css" />
+    <link rel="stylesheet" href="src/styles/vistas.css" />
+    <link rel="stylesheet" href="src/styles/juegos.css" />
+  </head>
+
+  <body>
+    <!-- Enlace de salto: requisito de accesibilidad para navegación por teclado. -->
+    <a class="enlace-saltar" href="#contenido-principal">Saltar al contenido principal</a>
+
+    <!-- El armazón (cabecera, navegación, pie) se monta desde src/ui/layout.js -->
+    <div id="aplicacion" class="aplicacion" aria-busy="true">
+      <p class="cargando-inicial" role="status">Cargando Escena Segura…</p>
+    </div>
+
+    <noscript>
+      <div class="sin-javascript">
+        <h1>Escena Segura</h1>
+        <p>
+          Esta aplicación necesita JavaScript para funcionar. Actívalo en tu navegador y
+          vuelve a cargar la página.
+        </p>
+      </div>
+    </noscript>
+
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>

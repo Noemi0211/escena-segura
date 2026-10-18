@@ -1,0 +1,294 @@
+/* ==========================================================================
+   ESCENA SEGURA — tokens.css
+   --------------------------------------------------------------------------
+   Única fuente de verdad del diseño. Ningún otro archivo de estilos debe
+   inventar colores, espaciados ni tamaños: se referencian a estas
+   variables. Así, un cambio de paleta o una nueva unidad formativa no obliga
+   a tocar componentes.
+
+   Estética de referencia: centro coordinador de emergencias / panel de control
+   de un servicio de emergencias sanitarias.
+
+   Paleta de partida (requisito del proyecto):
+     · azul sanitario   -> --c-sanitario-*
+     · amarillo advertencia -> --c-advertencia-*
+     · rojo emergencia  -> --c-emergencia-*
+     · gris neutro      -> --c-neutro-*
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------------
+     1. COLOR — Azul sanitario
+     --------------------------------------------------------------------- */
+  --c-sanitario-50: #e8f4fa;
+  --c-sanitario-100: #c2e2f2;
+  --c-sanitario-200: #8ecbe6;
+  --c-sanitario-300: #4fa8d1;
+  --c-sanitario-400: #2487ba;
+  --c-sanitario-500: #0f6c9c;
+  --c-sanitario-600: #0b5680;
+  --c-sanitario-700: #094360;
+  --c-sanitario-800: #07344f;
+  --c-sanitario-900: #05283c;
+  --c-sanitario-950: #021a29;
+
+  /* ------------------------------------------------------------------------
+     2. COLOR — Amarillo de advertencia
+     --------------------------------------------------------------------- */
+  --c-advertencia-100: #fdf3d3;
+  --c-advertencia-200: #fae39c;
+  --c-advertencia-300: #f7d05c;
+  --c-advertencia-400: #f5c518;
+  --c-advertencia-500: #e0a800;
+  --c-advertencia-600: #b88300;
+  --c-advertencia-700: #8c6300;
+  --c-advertencia-800: #6b4b00;
+  --c-advertencia-900: #4d3700;
+
+  /* ------------------------------------------------------------------------
+     3. COLOR — Rojo de emergencia
+     --------------------------------------------------------------------- */
+  --c-emergencia-100: #fddfe3;
+  --c-emergencia-200: #fab8c1;
+  --c-emergencia-300: #f48395;
+  --c-emergencia-400: #e8526a;
+  --c-emergencia-500: #d7263d;
+  --c-emergencia-600: #b31c31;
+  --c-emergencia-700: #8e1727;
+  --c-emergencia-800: #6b1220;
+  --c-emergencia-900: #4c0d17;
+
+  /* ------------------------------------------------------------------------
+     4. COLOR — Gris neutro
+     --------------------------------------------------------------------- */
+  --c-neutro-0: #ffffff;
+  --c-neutro-50: #f6f8fa;
+  --c-neutro-100: #e9edf2;
+  --c-neutro-200: #d3dae3;
+  --c-neutro-300: #b0bbc9;
+  --c-neutro-400: #8494a8;
+  --c-neutro-500: #64748b;
+  --c-neutro-600: #4d5a6d;
+  --c-neutro-700: #3d4757;
+  --c-neutro-800: #2a323e;
+  --c-neutro-850: #212936;
+  --c-neutro-900: #18202b;
+  --c-neutro-950: #0f151d;
+  --c-neutro-1000: #0b1620;
+
+  /* ------------------------------------------------------------------------
+     5. COLOR — Semánticos de realimentación (accesibilidad)
+     `correcto` y `error` NO se distinguen solo por color: siempre van
+     acompañados de icono y texto (ver components.css).
+     --------------------------------------------------------------------- */
+  --c-correcto: #34d399;
+  --c-correcto-fondo: #06281f;
+  --c-correcto-borde: #1f7a5a;
+  --c-error: #ff7a8a;
+  --c-error-fondo: #2d0b12;
+  --c-error-borde: #8e1727;
+  --c-info: #7dd3fc;
+  --c-info-fondo: #06222f;
+  --c-info-borde: #0f6c9c;
+
+  /* ------------------------------------------------------------------------
+     6. COLOR — Superficies del panel de control
+     --------------------------------------------------------------------- */
+  --fondo-app: var(--c-neutro-1000);
+  --fondo-panel: var(--c-neutro-900);
+  --fondo-panel-alto: var(--c-neutro-850);
+  --fondo-carta: var(--c-neutro-850);
+  --fondo-carta-alt: var(--c-neutro-800);
+  --fondo-hundido: var(--c-neutro-950);
+  --fondo-cabecera: rgba(7, 34, 52, 0.92);
+
+  --borde-sutil: rgba(255, 255, 255, 0.08);
+  --borde-medio: rgba(255, 255, 255, 0.16);
+  --borde-fuerte: rgba(255, 255, 255, 0.28);
+  --borde-acento: var(--c-sanitario-400);
+
+  --texto-1: #f2f6fa; /* Titulares. Contraste 15:1 sobre --fondo-app        */
+  --texto-2: #c3cfdb; /* Texto corrente.  Contraste 9:1                   */
+  --texto-3: #93a2b4; /* Texto secundario. Contraste 5.4:1                 */
+  --texto-inverso: #06131d;
+
+  /* ------------------------------------------------------------------------
+     7. COLOR — Retícula de fondo (sensación de sala de control)
+     --------------------------------------------------------------------- */
+  --reticula-color: rgba(79, 168, 209, 0.05);
+  --reticula-tamano: 32px;
+  --reticula-grosor: 1px;
+  --reticula-activa: true;
+
+  /* ------------------------------------------------------------------------
+     8. TIPOGRAFÍA
+     Familia de sistema: cero descargas, funciona sin conexión.
+     --------------------------------------------------------------------- */
+  --fuente-titulo: 'Segoe UI Semibold', 'Segoe UI', system-ui, -apple-system,
+    'Helvetica Neue', Arial, sans-serif;
+  --fuente-texto: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  --fuente-mono: ui-monospace, 'Cascadia Mono', 'Consolas', 'Roboto Mono',
+    'Courier New', monospace;
+
+  /* Escala tipográfica relativa (rem) — respeta la preferencia del usuario. */
+  --t-xs: 0.75rem;
+  --t-sm: 0.875rem;
+  --t-base: 1rem;
+  --t-md: 1.0625rem;
+  --t-lg: 1.25rem;
+  --t-xl: 1.5rem;
+  --t-2xl: 1.875rem;
+  --t-3xl: 2.25rem;
+  --t-4xl: clamp(2.25rem, 6vw, 3.5rem);
+  --t-5xl: clamp(2.75rem, 9vw, 5rem);
+
+  --peso-normal: 400;
+  --peso-medio: 600;
+  --peso-fuerte: 700;
+
+  --interlinea-estrecha: 1.2;
+  --interlinea-normal: 1.55;
+  --interlinea-amplia: 1.75;
+
+  --ancho-lectura: 68ch; /* Legibilidad: ~70 caracteres por línea.       */
+
+  /* ------------------------------------------------------------------------
+     9. ESPACIADO — Escala de 4 px
+     --------------------------------------------------------------------- */
+  --e-0: 0;
+  --e-1: 0.25rem;
+  --e-2: 0.5rem;
+  --e-3: 0.75rem;
+  --e-4: 1rem;
+  --e-5: 1.25rem;
+  --e-6: 1.5rem;
+  --e-8: 2rem;
+  --e-10: 2.5rem;
+  --e-12: 3rem;
+  --e-16: 4rem;
+  --e-20: 5rem;
+  --e-24: 6rem;
+
+  /* ------------------------------------------------------------------------
+     10. RADIOS
+     --------------------------------------------------------------------- */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 18px;
+  --r-full: 999px;
+
+  /* ------------------------------------------------------------------------
+     11. SOMBRAS Y ANILLOS DE FOCO
+     --------------------------------------------------------------------- */
+  --sombra-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --sombra-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --sombra-lg: 0 12px 32px rgba(0, 0, 0, 0.55);
+  --sombra-foco: 0 0 0 3px var(--c-neutro-1000), 0 0 0 6px var(--c-sanitario-300);
+  --sombra-foco-advertencia: 0 0 0 3px var(--c-neutro-1000), 0 0 0 6px var(--c-advertencia-300);
+
+  /* ------------------------------------------------------------------------
+     12. TRANSICIONES Y MOVIMIENTO
+     --------------------------------------------------------------------- */
+  --trans-rapida: 120ms ease-out;
+  --trans-media: 220ms cubic-bezier(0.2, 0, 0.2, 1);
+  --trans-lenta: 400ms cubic-bezier(0.2, 0, 0.2, 1);
+  --duracion-animacion: 1; /* Multiplicador global; 0 desactiva animaciones. */
+
+  /* ------------------------------------------------------------------------
+     13. MEDIDAS DE DISEÑO
+     --------------------------------------------------------------------- */
+  --altura-cabecera: 4rem;
+  --altura-pie: auto;
+  --ancho-maximo: 76rem;
+  --ancho-maximo-estrecho: 48rem;
+  --altura-barra-util: 1.25rem; /* Espacio reservado en móvil para la URL. */
+  --z-cabecera: 30;
+  --z-pie: 20;
+  --z-modal: 60;
+  --z-aviso: 70;
+}
+
+/* ==========================================================================
+   TEMA CLARO — Alto contraste para pantallas en interiores y para alumnado
+   con baja visión. Se activa con data-tema="claro" o por preferencia del
+   sistema cuando no hay elección explícita.
+   ========================================================================== */
+[data-tema='claro'] {
+  --fondo-app: #eef2f6;
+  --fondo-panel: #ffffff;
+  --fondo-panel-alto: #f6f8fa;
+  --fondo-carta: #ffffff;
+  --fondo-carta-alt: #f1f5f9;
+  --fondo-hundido: #e4eaf0;
+  --fondo-cabecera: rgba(255, 255, 255, 0.94);
+
+  --borde-sutil: rgba(9, 67, 96, 0.14);
+  --borde-medio: rgba(9, 67, 96, 0.24);
+  --borde-fuerte: rgba(9, 67, 96, 0.4);
+
+  --texto-1: #0b1620; /* 16.8:1 */
+  --texto-2: #2a323e; /* 11.4:1 */
+  --texto-3: #4d5a6d; /*  7.2:1 */
+  --texto-inverso: #ffffff;
+
+  --c-correcto: #047857;
+  --c-correcto-fondo: #e6f6ef;
+  --c-correcto-borde: #047857;
+  --c-error: #b31c31;
+  --c-error-fondo: #fdecee;
+  --c-error-borde: #b31c31;
+  --c-info: #0b5680;
+  --c-info-fondo: #e6f1f8;
+  --c-info-borde: #0b5680;
+
+  --reticula-color: rgba(15, 108, 156, 0.07);
+
+  --sombra-sm: 0 1px 2px rgba(9, 67, 96, 0.1);
+  --sombra-md: 0 4px 12px rgba(9, 67, 96, 0.12);
+  --sombra-lg: 0 12px 32px rgba(9, 67, 96, 0.16);
+  --sombra-foco: 0 0 0 3px #ffffff, 0 0 0 6px var(--c-sanitario-500);
+  --sombra-foco-advertencia: 0 0 0 3px #ffffff, 0 0 0 6px var(--c-advertencia-500);
+}
+
+/* ==========================================================================
+   PREFERENCIAS DEL USUARIO
+   ========================================================================== */
+
+/* Movimiento reducido: apaga transiciones y animaciones decorativas.
+   Obligatorio en WCAG 2.1 (2.3.3 Animation from Interactions). */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duracion-animacion: 0;
+    --trans-rapida: 1ms linear;
+    --trans-media: 1ms linear;
+    --trans-lenta: 1ms linear;
+  }
+}
+
+/* Alto contraste del sistema operativo (Windows). */
+@media (prefers-contrast: more) {
+  :root {
+    --borde-sutil: var(--borde-fuerte);
+    --borde-medio: var(--borde-fuerte);
+    --texto-3: var(--texto-2);
+    --reticula-activa: false;
+  }
+}
+
+/* Impresión: el alumnado puede llevar las fichas en papel. */
+@media print {
+  :root {
+    --fondo-app: #ffffff;
+    --fondo-panel: #ffffff;
+    --fondo-carta: #ffffff;
+    --fondo-carta-alt: #ffffff;
+    --texto-1: #000000;
+    --texto-2: #000000;
+    --texto-3: #333333;
+    --borde-sutil: #999999;
+    --borde-medio: #666666;
+    --reticula-activa: false;
+  }
+}

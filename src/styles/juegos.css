@@ -1,0 +1,801 @@
+/* ==========================================================================
+   ESCENA SEGURA — juegos.css
+   --------------------------------------------------------------------------
+   Estilos del "escenario de juego" (host). Los motores de src/games/ comparten
+   este lenguaje visual, de modo que la implementación de un motor nuevo no
+   requiere diseñar nada: solo usar las clases de este archivo.
+
+   Clases transversales definidas aquí:
+     .escenario-juego .marcador-motor .rejilla-memory .carta-memory
+     .carta-memory__cara .rejilla-sprint .opcion-respuesta .cronometro
+      .racha .fase-escape .diario-bordo
+   ========================================================================== */
+
+/* ==========================================================================
+   1. ESCENARIO DE JUEGO (host común a los tres motores)
+   ========================================================================== */
+.escenario-juego {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-5);
+}
+
+.marcador-motor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e-3) var(--e-6);
+  padding: var(--e-3) var(--e-4);
+  background-color: var(--fondo-hundido);
+  border: 1px solid var(--borde-sutil);
+  border-radius: var(--r-md);
+}
+
+.marcador-motor__dato {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 4.5rem;
+}
+
+.marcador-motor__etiqueta {
+  font-family: var(--fuente-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+}
+
+.marcador-motor__valor {
+  font-family: var(--fuente-mono);
+  font-size: var(--t-lg);
+  font-weight: var(--peso-fuerte);
+  line-height: 1.1;
+  color: var(--texto-1);
+  font-variant-numeric: tabular-nums;
+}
+
+.marcador-motor__valor--acento {
+  color: var(--c-sanitario-200);
+}
+.marcador-motor__valor--alerta {
+  color: var(--c-advertencia-300);
+}
+.marcador-motor__valor--peligro {
+  color: var(--c-emergencia-300);
+}
+
+.marcador-motor__separador {
+  width: 1px;
+  align-self: stretch;
+  background-color: var(--borde-sutil);
+}
+
+.marcador-motor__crecer {
+  flex: 1 1 auto;
+}
+
+/* Botonera de la cabecera del juego (reiniciar, salir, ayuda). */
+.marcador-motor__acciones {
+  display: flex;
+  gap: var(--e-2);
+  margin-left: auto;
+}
+
+/* ==========================================================================
+   2. CRONÓMETRO (Sprint)
+   ========================================================================== */
+.cronometro {
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+  font-family: var(--fuente-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.cronometro__pila {
+  position: relative;
+  width: 0.5rem;
+  height: 1.25rem;
+  background-color: var(--fondo-panel);
+  border: 1px solid var(--borde-medio);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.cronometro__relleno {
+  position: absolute;
+  inset: auto 0 0 0;
+  background-color: var(--c-correcto);
+  transition: height 100ms linear, background-color var(--trans-media);
+}
+
+.cronometro--aviso .cronometro__relleno {
+  background-color: var(--c-advertencia-400);
+}
+.cronometro--alerta .cronometro__relleno {
+  background-color: var(--c-emergencia-500);
+}
+
+.cronometro__cifras {
+  font-size: var(--t-lg);
+  font-weight: var(--peso-fuerte);
+  color: var(--texto-1);
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
+   3. RACHA DE ACIERTOS (Sprint)
+   ========================================================================== */
+.racha {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  padding: var(--e-1) var(--e-3);
+  border: 1px solid var(--c-advertencia-700);
+  border-radius: var(--r-full);
+  background-color: var(--c-advertencia-900);
+  font-family: var(--fuente-mono);
+  font-size: var(--t-sm);
+  font-weight: var(--peso-fuerte);
+  color: var(--c-advertencia-200);
+  animation: racha-pulso calc(var(--trans-lenta)) both;
+}
+
+.racha__icono {
+  width: 1rem;
+  height: 1rem;
+}
+
+@keyframes racha-pulso {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.4;
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   4. REJILLA DE OPCIONES (Sprint y Escape Room comparten estilo)
+   ========================================================================== */
+.opciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--e-3);
+  list-style: none;
+}
+
+.opciones--apiladas {
+  grid-template-columns: 1fr;
+}
+
+.opcion-respuesta {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e-3);
+  width: 100%;
+  min-height: 3rem;
+  padding: var(--e-3) var(--e-4);
+  text-align: left;
+  font-size: var(--t-sm);
+  color: var(--texto-1);
+  background-color: var(--fondo-carta);
+  border: 1px solid var(--borde-medio);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: background-color var(--trans-rapida), border-color var(--trans-rapida),
+    transform var(--trans-rapida);
+}
+
+.opcion-respuesta:hover:not([disabled]) {
+  background-color: var(--fondo-carta-alt);
+  border-color: var(--c-sanitario-300);
+  transform: translateX(2px);
+}
+
+.opcion-respuesta__tecla {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  font-family: var(--fuente-mono);
+  font-size: var(--t-xs);
+  font-weight: var(--peso-fuerte);
+  color: var(--texto-3);
+  background-color: var(--fondo-hundido);
+  border: 1px solid var(--borde-medio);
+  border-radius: var(--r-sm);
+}
+
+.opcion-respuesta:hover:not([disabled]) .opcion-respuesta__tecla {
+  color: var(--c-sanitario-200);
+  border-color: var(--c-sanitario-500);
+}
+
+.opcion-respuesta__texto {
+  min-width: 0;
+  padding-top: 0.15rem;
+}
+
+.opcion-respuesta__imagen {
+  flex-shrink: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: contain;
+  background-color: var(--c-neutro-0);
+  border-radius: var(--r-sm);
+  padding: 2px;
+}
+
+/* Estados tras responder. Se combinan icono + color, nunca color solo. */
+.opcion-respuesta--correcta {
+  border-color: var(--c-correcto);
+  background-color: var(--c-correcto-fondo);
+}
+
+.opcion-respuesta--correcta .opcion-respuesta__tecla {
+  color: var(--c-correcto);
+  border-color: var(--c-correcto);
+}
+
+.opcion-respuesta--incorrecta {
+  border-color: var(--c-emergencia-400);
+  background-color: var(--c-error-fondo);
+}
+
+.opcion-respuesta--incorrecta .opcion-respuesta__tecla {
+  color: var(--c-emergencia-300);
+  border-color: var(--c-emergencia-500);
+}
+
+.opcion-respuesta--atenuada {
+  opacity: 0.5;
+}
+
+.opcion-respuesta[disabled] {
+  cursor: default;
+}
+
+/* Marca de resultado en la esquina de la opción. */
+.opcion-respuesta__marca {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.4rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.opcion-respuesta--correcta .opcion-respuesta__marca {
+  color: var(--c-correcto);
+}
+
+.opcion-respuesta--incorrecta .opcion-respuesta__marca {
+  color: var(--c-emergencia-300);
+}
+
+/* ==========================================================================
+   5. ENUNCIADO DE PREGUNTA / DECISIÓN
+   ========================================================================== */
+.enunciado {
+  padding: var(--e-5);
+  background-color: var(--fondo-carta);
+  border: 1px solid var(--borde-sutil);
+  border-top: 3px solid var(--c-sanitario-400);
+  border-radius: var(--r-md);
+}
+
+.enunciado__contexto {
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+  margin-bottom: var(--e-3);
+  font-family: var(--fuente-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-sanitario-300);
+}
+
+.enunciado__texto {
+  font-size: var(--t-md);
+  line-height: var(--interlinea-amplia);
+  color: var(--texto-1);
+  max-width: var(--ancho-lectura);
+}
+
+.enunciado__texto strong {
+  color: var(--c-advertencia-200);
+  background-color: rgba(245, 197, 24, 0.12);
+  padding: 0 0.2em;
+  border-radius: 3px;
+}
+
+.enunciado__imagen {
+  width: 5rem;
+  height: 5rem;
+  object-fit: contain;
+  margin-bottom: var(--e-3);
+  background-color: var(--c-neutro-0);
+  border-radius: var(--r-sm);
+  padding: 2px;
+}
+
+/* ==========================================================================
+   6. MEMORY — rejilla de cartas
+   ========================================================================== */
+
+/* Zona donde vive el tablero. El motor de Memory repinta el marcador y el
+   tablero por separado, así que el tablero necesita su propio contenedor. */
+.zona-tablero {
+  margin-top: var(--e-4);
+}
+
+.rejilla-memory {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 0.4rem;
+  width: min(100%, 52rem);
+  margin-inline: auto;
+  perspective: 1000px;
+}
+
+.carta-memory {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 0.86;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: filter var(--trans-rapida);
+  filter: drop-shadow(0 0.22rem 0.45rem rgba(15, 23, 42, 0.12));
+}
+
+.carta-memory[disabled] {
+  cursor: default;
+}
+
+.carta-memory--resuelta {
+  visibility: hidden;
+}
+
+.carta-memory__cara {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-2);
+  padding: var(--e-3);
+  text-align: center;
+  border: 1px solid var(--borde-medio);
+  border-radius: 0.4rem;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  z-index: 1;
+  transition: transform calc(var(--trans-media) * 1.5);
+}
+
+/* Cara oculta: patrón más cercano a una ficha de Mahjong. */
+.carta-memory__cara--dorso {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%),
+    linear-gradient(180deg, var(--c-sanitario-800), var(--c-sanitario-900));
+  background-image:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.04) 0 6px,
+      transparent 6px 12px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.04) 0 6px,
+      transparent 6px 12px
+    );
+  border-color: rgba(148, 163, 184, 0.8);
+  color: var(--c-sanitario-200);
+  z-index: 2;
+}
+
+.carta-memory__cara--dorso svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  opacity: 0.8;
+}
+
+.carta-memory__cara--dorso span {
+  font-family: var(--fuente-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Cara visible: contiene el contenido del par. */
+.carta-memory__cara--anverso {
+  background: linear-gradient(145deg, #fffdf4, #e7e0c9);
+  border-color: #a79f87;
+  color: #17231f;
+  transform: rotateY(180deg);
+  padding: 0.3rem;
+  font-size: clamp(0.58rem, 0.8vw, 0.72rem);
+  line-height: 1.08;
+  font-weight: var(--peso-medio);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  z-index: 1;
+  box-shadow: inset 0 0 0 2px rgba(112, 103, 79, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.carta-memory--volteada .carta-memory__cara--dorso,
+.carta-memory--resuelta .carta-memory__cara--dorso,
+.carta-memory--fallo .carta-memory__cara--dorso,
+.carta-memory--vista-previa .carta-memory__cara--dorso {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+.carta-memory--volteada .carta-memory__cara--anverso,
+.carta-memory--resuelta .carta-memory__cara--anverso,
+.carta-memory--fallo .carta-memory__cara--anverso,
+.carta-memory--vista-previa .carta-memory__cara--anverso {
+  transform: rotateY(0deg);
+  z-index: 3;
+}
+
+.carta-memory__cara--anverso > * {
+  max-width: 100%;
+}
+
+.carta-memory__imagen {
+  width: 100%;
+  max-width: 5.5rem;
+  max-height: 5.5rem;
+  object-fit: contain;
+}
+
+.carta-memory__icono {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--c-sanitario-300);
+}
+
+.carta-memory--fallo .carta-memory__cara--anverso {
+  background-color: var(--c-error-fondo);
+  border-color: var(--c-error-borde);
+  color: var(--c-error);
+}
+
+/* Etiqueta que identifica el lado de la pareja (ej. "Situación" / "Origen"). */
+.carta-memory__tipo {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.5rem;
+  font-family: var(--fuente-mono);
+  font-size: clamp(0.42rem, 0.9vw, 0.5625rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #26332f;
+  font-weight: var(--peso-fuerte);
+}
+
+/* ==========================================================================
+   7. ESCAPE ROOM — mapa de fases
+
+   El mapa de fases se pinta con `progresoSegmentos()` de `comun.js`, igual que
+   el de los otros dos juegos: una única forma de mostrar progreso, con su
+   `role="progressbar"` y su `aria-valuenow`. No hay un segundo mapa con
+   clases propias; si se añade, nace sin `role` y el lector de pantalla no lo
+   anuncia.
+   ========================================================================== */
+
+/* Tarjeta de la fase activa. */
+.fase-escape {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-4);
+  padding: var(--e-6);
+  background-color: var(--fondo-panel);
+  border: 1px solid var(--borde-medio);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sombra-md);
+}
+
+.fase-escape__cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--e-3);
+  padding-bottom: var(--e-3);
+  border-bottom: 1px solid var(--borde-sutil);
+}
+
+.fase-escape__numero {
+  font-family: var(--fuente-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-sanitario-300);
+}
+
+.fase-escape__titulo {
+  font-size: var(--t-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.fase-escape__tiempo {
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+  font-family: var(--fuente-mono);
+  font-size: var(--t-xs);
+  color: var(--texto-3);
+}
+
+.fase-escape__tiempo svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.fase-escape__texto {
+  font-size: var(--t-md);
+  line-height: var(--interlinea-amplia);
+  color: var(--texto-1);
+  max-width: var(--ancho-lectura);
+}
+
+.fase-escape__imagen {
+  display: block;
+  max-width: min(14rem, 100%);
+  max-height: 14rem;
+  object-fit: contain;
+  border: 1px solid var(--borde-medio);
+  border-radius: var(--r-md);
+  background-color: var(--fondo-panel);
+  padding: var(--e-2);
+}
+
+/* "Diario de bordo": acumula el registro narrativo de la partida. */
+.diario-bordo {
+  max-height: 16rem;
+  overflow-y: auto;
+  padding: var(--e-4);
+  background-color: var(--fondo-hundido);
+  border: 1px solid var(--borde-sutil);
+  border-left: 3px solid var(--c-advertencia-400);
+  border-radius: var(--r-sm);
+  font-family: var(--fuente-mono);
+  font-size: var(--t-xs);
+  line-height: 1.7;
+  color: var(--texto-3);
+  list-style: none;
+}
+
+.diario-bordo__linea {
+  display: flex;
+  gap: var(--e-3);
+}
+
+.diario-bordo__hora {
+  flex-shrink: 0;
+  color: var(--c-sanitario-300);
+  font-variant-numeric: tabular-nums;
+}
+
+.diario-bordo__linea--acierto .diario-bordo__texto {
+  color: var(--c-correcto);
+}
+
+.diario-bordo__linea--error .diario-bordo__texto {
+  color: var(--c-emergencia-300);
+}
+
+/* Pantalla de "escape room completado". */
+.escape-completado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--e-4);
+  padding: var(--e-10) var(--e-6);
+  text-align: center;
+  background: linear-gradient(
+    150deg,
+    var(--c-correcto-fondo),
+    var(--fondo-panel) 65%
+  );
+  border: 1px solid var(--c-correcto-borde);
+  border-radius: var(--r-lg);
+}
+
+.escape-completado__sello {
+  width: 5rem;
+  height: 5rem;
+  color: var(--c-correcto);
+}
+
+/* ==========================================================================
+   8. PANTALLA DE MÓDULO EN CONSTRUCCIÓN (estado transitorio de la Fase 1)
+   ========================================================================== */
+.en-construccion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-5);
+  padding: var(--e-8);
+  background-color: var(--fondo-panel);
+  border: 1px dashed var(--c-advertencia-600);
+  border-radius: var(--r-lg);
+}
+
+.en-construccion__cabecera {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e-4);
+}
+
+.en-construccion__icono {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  color: var(--c-advertencia-400);
+}
+
+.en-construccion__titulo {
+  font-size: var(--t-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--e-2);
+}
+
+.en-construccion__texto {
+  font-size: var(--t-sm);
+  color: var(--texto-2);
+  max-width: var(--ancho-lectura);
+}
+
+/* Contrato del motor: documenta la API que la Fase 2 debe implementar. */
+.contrato-motor {
+  padding: var(--e-4);
+  background-color: var(--fondo-hundido);
+  border: 1px solid var(--borde-sutil);
+  border-radius: var(--r-md);
+}
+
+.contrato-motor__titulo {
+  font-family: var(--fuente-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-sanitario-300);
+  margin-bottom: var(--e-3);
+}
+
+.contrato-motor__lista {
+  display: grid;
+  gap: var(--e-2);
+  font-family: var(--fuente-mono);
+  font-size: var(--t-xs);
+  color: var(--texto-2);
+  list-style: none;
+}
+
+.contrato-motor__lista li {
+  display: flex;
+  gap: var(--e-2);
+  padding-left: var(--e-3);
+  border-left: 2px solid var(--borde-medio);
+}
+
+.contrato-motor__metodo {
+  color: var(--c-advertencia-200);
+}
+
+/* Vista previa de los datos que el motor ya recibe (trazabilidad didáctica). */
+.datos-disponibles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--e-3);
+  list-style: none;
+}
+
+.dato-disponible {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-1);
+  padding: var(--e-3);
+  background-color: var(--fondo-carta);
+  border: 1px solid var(--borde-sutil);
+  border-radius: var(--r-sm);
+}
+
+.dato-disponible__valor {
+  font-family: var(--fuente-mono);
+  font-size: var(--t-xl);
+  font-weight: var(--peso-fuerte);
+  color: var(--c-sanitario-200);
+  line-height: 1;
+}
+
+.dato-disponible__etiqueta {
+  font-size: var(--t-xs);
+  color: var(--texto-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ==========================================================================
+   9. ADAPTACIÓN A PANTALLAS
+   ========================================================================== */
+@media (max-width: 48rem) {
+  .marcador-motor {
+    gap: var(--e-3) var(--e-4);
+    padding: var(--e-3);
+  }
+
+  .marcador-motor__dato {
+    min-width: 3.5rem;
+  }
+
+  .marcador-motor__valor {
+    font-size: var(--t-md);
+  }
+
+  .marcador-motor__separador {
+    display: none;
+  }
+
+  .marcador-motor__acciones {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  /* En móvil, las cartas de Memory se agrupan en 3 columnas más compactas. */
+  .rejilla-memory {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.35rem;
+  }
+
+  .carta-memory__cara {
+    padding: var(--e-2);
+    font-size: var(--t-xs);
+  }
+
+  .fase-escape {
+    padding: var(--e-4);
+  }
+}
+
+/* Móvil pequeño: 2 columnas para que el texto siga siendo legible. */
+@media (max-width: 24rem) {
+  .rejilla-memory {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Pantallas táctiles: se elimina el hover y se amplía el área pulsable. */
+@media (hover: none) {
+  .tarjeta-tematica:hover,
+  .tarjeta-juego:hover,
+  .opcion-respuesta:hover,
+  .carta-memory:hover {
+    transform: none;
+  }
+
+  .opcion-respuesta {
+    min-height: 3.5rem;
+  }
+}

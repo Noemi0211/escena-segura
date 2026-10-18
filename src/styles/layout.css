@@ -1,0 +1,381 @@
+/* ==========================================================================
+   ESCENA SEGURA — layout.css
+   --------------------------------------------------------------------------
+   Armazón de la aplicación: cabecera, zona principal, pie, migas.
+   El HTML lo monta src/ui/layout.js; aquí solo se define su presentación.
+   ========================================================================== */
+
+.aplicacion {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* --------------------------------------------------------------------------
+   1. CABECERA — Barra de estado del panel de control
+   -------------------------------------------------------------------------- */
+.cabecera {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-cabecera);
+  background-color: var(--fondo-cabecera);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--borde-medio);
+  box-shadow: var(--sombra-sm);
+}
+
+.cabecera__fila {
+  display: flex;
+  align-items: center;
+  gap: var(--e-4);
+  max-width: var(--ancho-maximo);
+  min-height: var(--altura-cabecera);
+  margin-inline: auto;
+  padding-inline: var(--e-4);
+}
+
+.cabecera__marca {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+  flex-shrink: 0;
+  color: var(--texto-1);
+  text-decoration: none;
+  border-radius: var(--r-md);
+  padding: var(--e-1) var(--e-2);
+}
+
+.cabecera__marca:hover {
+  color: var(--texto-1);
+  background-color: var(--borde-sutil);
+}
+
+.cabecera__logo {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+}
+
+.cabecera__titulo {
+  font-family: var(--fuente-titulo);
+  font-size: var(--t-md);
+  font-weight: var(--peso-fuerte);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.cabecera__siglas {
+  font-size: 0.55em;
+  letter-spacing: 0.2em;
+  color: var(--c-sanitario-300);
+  font-weight: var(--peso-medio);
+  display: block;
+  margin-top: 0.25em;
+}
+
+.cabecera__espaciador {
+  flex: 1 1 auto;
+}
+
+.cabecera__acciones {
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+}
+
+.cabecera__enlace {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  padding: var(--e-2) var(--e-3);
+  border-radius: var(--r-md);
+  font-size: var(--t-sm);
+  font-weight: var(--peso-medio);
+  color: var(--texto-2);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color var(--trans-rapida), color var(--trans-rapida),
+    border-color var(--trans-rapida);
+  white-space: nowrap;
+}
+
+.cabecera__enlace:hover {
+  background-color: var(--borde-sutil);
+  color: var(--texto-1);
+  border-color: var(--borde-medio);
+}
+
+.cabecera__enlace[aria-current='page'] {
+  color: var(--c-sanitario-200);
+  background-color: var(--c-sanitario-900);
+  border-color: var(--borde-acento);
+}
+
+.cabecera__enlace svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+}
+
+/* Indicador de progreso global (barra fina bajo la cabecera). */
+.cabecera__progreso {
+  height: 3px;
+  background-color: var(--fondo-hundido);
+  overflow: hidden;
+}
+
+.cabecera__progreso-barra {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(
+    90deg,
+    var(--c-sanitario-400),
+    var(--c-advertencia-400)
+  );
+  transition: width var(--trans-lenta);
+}
+
+/* --------------------------------------------------------------------------
+   2. ZONA PRINCIPAL
+   -------------------------------------------------------------------------- */
+.principal {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: var(--ancho-maximo);
+  margin-inline: auto;
+  padding: var(--e-8) var(--e-4) var(--e-12);
+}
+
+.principal--estrecho {
+  max-width: var(--ancho-maximo-estrecho);
+}
+
+.principal--juego {
+  /* Las actividades necesitan todo el ancho: la rejilla de Memory es densa. */
+  max-width: 84rem;
+  padding-top: var(--e-5);
+}
+
+/* Ancla del enlace de salto. */
+#contenido-principal {
+  scroll-margin-top: calc(var(--altura-cabecera) + var(--e-4));
+}
+
+/* --------------------------------------------------------------------------
+   3. MIGA DE PAN (migas de navegación)
+   -------------------------------------------------------------------------- */
+.migas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e-2);
+  margin: 0 0 var(--e-5);
+  padding: 0;
+  list-style: none;
+  font-size: var(--t-sm);
+  color: var(--texto-3);
+}
+
+.migas__elemento {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+}
+
+/* El separador es un icono: solo se le da tamaño. El color lo hereda. */
+.migas__flecha {
+  display: inline-flex;
+  align-items: center;
+  color: var(--borde-fuerte);
+  user-select: none;
+}
+
+.migas__flecha svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.migas__enlace {
+  color: var(--texto-3);
+  text-decoration: none;
+  border-radius: var(--r-sm);
+  padding: 0.1em 0.25em;
+}
+
+.migas__enlace:hover {
+  color: var(--texto-1);
+  text-decoration: underline;
+}
+
+.migas__actual {
+  color: var(--texto-1);
+  font-weight: var(--peso-medio);
+}
+
+/* --------------------------------------------------------------------------
+   4. ENCABEZADO DE VISTA
+   -------------------------------------------------------------------------- */
+.vista-encabezado {
+  margin-bottom: var(--e-8);
+}
+
+.vista-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  font-family: var(--fuente-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-sanitario-300);
+  margin-bottom: var(--e-2);
+}
+
+.vista-titulo {
+  font-size: var(--t-3xl);
+  margin-bottom: var(--e-3);
+}
+
+.vista-descripcion {
+  max-width: var(--ancho-lectura);
+  font-size: var(--t-md);
+  color: var(--texto-2);
+}
+
+.vista-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-3);
+  margin-top: var(--e-6);
+}
+
+/* --------------------------------------------------------------------------
+   5. PIE DE PÁGINA — Créditos y licencia
+   Requisito: debe aparecer de forma discreta en TODAS las páginas.
+   -------------------------------------------------------------------------- */
+.pie {
+  flex-shrink: 0;
+  z-index: var(--z-pie);
+  margin-top: var(--e-12);
+  padding: var(--e-6) var(--e-4) calc(var(--e-6) + env(safe-area-inset-bottom, 0px));
+  background-color: var(--fondo-hundido);
+  border-top: 1px solid var(--borde-sutil);
+  color: var(--texto-3);
+  font-size: var(--t-xs);
+}
+
+.pie__contenido {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-4);
+  max-width: var(--ancho-maximo);
+  margin-inline: auto;
+}
+
+.pie__creditos {
+  max-width: 60ch;
+  line-height: var(--interlinea-normal);
+}
+
+.pie__licencia {
+  margin-top: var(--e-1);
+  color: var(--texto-3);
+  opacity: 0.85;
+}
+
+.pie__licencia a {
+  color: var(--texto-3);
+}
+
+.pie__licencia a:hover {
+  color: var(--c-sanitario-300);
+}
+
+.pie__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e-4);
+  font-family: var(--fuente-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+}
+
+/* --------------------------------------------------------------------------
+   6. ADAPTACIÓN A PANTALLAS
+   -------------------------------------------------------------------------- */
+
+/* Móvil pequeño: la cabecera se compacta. */
+@media (max-width: 30rem) {
+  .cabecera__fila {
+    gap: var(--e-2);
+    min-height: 3.25rem;
+  }
+
+  .cabecera__titulo {
+    font-size: var(--t-sm);
+  }
+
+  .cabecera__siglas {
+    display: none;
+  }
+
+  .cabecera__enlace span {
+    display: none;
+  }
+
+  .cabecera__enlace {
+    padding: var(--e-2);
+  }
+
+  .principal {
+    padding-top: var(--e-5);
+  }
+}
+
+/* Móvil grande en vertical: espacio extra en la parte superior al usar la URL. */
+@media (max-width: 48rem) and (orientation: portrait) {
+  .principal {
+    padding-bottom: calc(var(--e-12) + var(--altura-barra-util));
+  }
+}
+
+/* Tablette: más aire horizontal. */
+@media (min-width: 48rem) {
+  .principal {
+    padding-inline: var(--e-6);
+  }
+}
+
+/* Ordenador: contenido cómodo de leer. */
+@media (min-width: 80rem) {
+  .principal {
+    padding-inline: var(--e-8);
+  }
+}
+
+/* Impresión: sin cabecera fija ni retícula. */
+@media print {
+  .cabecera {
+    position: static;
+    box-shadow: none;
+  }
+
+  .cabecera__acciones,
+  .pie__meta {
+    display: none;
+  }
+
+  .principal {
+    max-width: none;
+    padding: 0;
+  }
+}

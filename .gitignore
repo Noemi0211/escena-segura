@@ -1,0 +1,68 @@
+# ==========================================================================
+# ESCENA SEGURA — .gitignore
+# ==========================================================================
+
+# --- MATERIAL DE TRABAJO: NUNCA SE PUBLICA ---------------------------------
+# Los documentos de _privado-NoemiCelaya/ son materiales de trabajo del
+# profesorado. Contienen material de autoría con licencia CC BY-NC-SA 4.0 y
+# podrían ser abiertos por error o servidos por error desde el despliegue.
+# No se versionan, no se despliegan y no se muestran al alumnado.
+_privado-NoemiCelaya/
+*.docx
+*.doc
+
+# Los cuadernillos de respuestas que genera `npm run generar:pdf` son material
+# de corrección: se generan en local cuando hacen falta, pero no se publican.
+preguntas-y-respuestas/
+
+# Aviso: los ficheros que SÍ se publican viven en src/assets/.
+# Si alguna vez se copia material de trabajo a src/, se detecta aquí.
+
+# --- DepENDENCIAS -----------------------------------------------------------
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# --- DISTRIBUCIÓN -----------------------------------------------------------
+# No hay build: el proyecto se despliega la raíz del repositorio.
+# Si en el futuro se añade Vite/Webpack, esta línea se activa.
+dist/
+build/
+.vite/
+
+# --- SISTEMA OPERATIVO ------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# --- EDITORES ---------------------------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+
+# --- TEMPORALES Y LOCALES ---------------------------------------------------
+*.log
+npm-debug.log*
+yarn-error.log*
+.env
+.env.local
+.cache/
+tmp/
+temp/
+
+# --- SISTEMAS DE CONTROL DE VERSIONES (el repo raíz puede no ser repo) -------
+# Si escena-segura/ se anidara dentro de otro repo, esto evita duplicar historial.
+.git/
+.github/ISSUE_TEMPLATE/
+
+# --- CAPTURAS Y DOCUMENTACIÓN NO PUBLICADA ----------------------------------
+/docs-local/
+capturas/
+*.local.md

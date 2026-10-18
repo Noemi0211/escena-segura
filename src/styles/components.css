@@ -1,0 +1,761 @@
+/* ==========================================================================
+   ESCENA SEGURA — components.css
+   --------------------------------------------------------------------------
+   Componentes reutilizables compartidos por TODAS las vistas y motores.
+   Cada bloque corresponde a un componente de src/ui/componentes/.
+   Si un componente necesita estilo propio y no es reutilizable, su CSS va en
+   vistas.css. Regla: componente reutilizable -> aquí; pantalla concreta ->
+   vistas.css.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. BOTONES
+   ========================================================================== */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e-2);
+  padding: var(--e-3) var(--e-5);
+  min-height: 2.75rem; /* Objetivo táctil mínimo recomendado (44 px). */
+  font-family: var(--fuente-titulo);
+  font-size: var(--t-sm);
+  font-weight: var(--peso-fuerte);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: background-color var(--trans-rapida), color var(--trans-rapida),
+    border-color var(--trans-rapida), transform var(--trans-rapida),
+    box-shadow var(--trans-rapida);
+}
+
+.boton svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+}
+
+.boton:active {
+  transform: translateY(1px);
+}
+
+.boton[disabled],
+.boton[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* --- Variantes ----------------------------------------------------------- */
+.boton--primario {
+  background-color: var(--c-sanitario-500);
+  border-color: var(--c-sanitario-300);
+  color: var(--c-neutro-0);
+}
+
+.boton--primario:hover:not([disabled]) {
+  background-color: var(--c-sanitario-400);
+  color: var(--c-neutro-0);
+}
+
+.boton--advertencia {
+  background-color: var(--c-advertencia-400);
+  border-color: var(--c-advertencia-300);
+  color: var(--texto-inverso);
+}
+
+.boton--advertencia:hover:not([disabled]) {
+  background-color: var(--c-advertencia-300);
+  color: var(--texto-inverso);
+}
+
+.boton--peligro {
+  background-color: var(--c-emergencia-500);
+  border-color: var(--c-emergencia-300);
+  color: var(--c-neutro-0);
+}
+
+.boton--peligro:hover:not([disabled]) {
+  background-color: var(--c-emergencia-400);
+  color: var(--c-neutro-0);
+}
+
+.boton--secundario {
+  background-color: transparent;
+  border-color: var(--borde-medio);
+  color: var(--texto-1);
+}
+
+.boton--secundario:hover:not([disabled]) {
+  background-color: var(--borde-sutil);
+  border-color: var(--borde-fuerte);
+  color: var(--texto-1);
+}
+
+.boton--fantasma {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--texto-2);
+}
+
+.boton--fantasma:hover:not([disabled]) {
+  background-color: var(--borde-sutil);
+  color: var(--texto-1);
+}
+
+.boton--bloque {
+  width: 100%;
+}
+
+.boton--grande {
+  min-height: 3.25rem;
+  padding: var(--e-4) var(--e-6);
+  font-size: var(--t-base);
+}
+
+.boton--pequeno {
+  min-height: 2.25rem;
+  padding: var(--e-2) var(--e-3);
+  font-size: var(--t-xs);
+}
+
+/* ==========================================================================
+   2. TARJETA BASE
+   ========================================================================== */
+.carta {
+  display: flex;
+  flex-direction: column;
+  padding: var(--e-5);
+  background-color: var(--fondo-carta);
+  border: 1px solid var(--borde-sutil);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sombra-sm);
+}
+
+.carta__titulo {
+  font-size: var(--t-md);
+  margin-bottom: var(--e-2);
+}
+
+.carta__texto {
+  font-size: var(--t-sm);
+  color: var(--texto-2);
+  line-height: var(--interlinea-normal);
+}
+
+.carta__cabecera {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--e-3);
+  margin-bottom: var(--e-3);
+}
+
+.carta__cuerpo {
+  flex: 1 0 auto;
+}
+
+.carta__pie {
+  margin-top: var(--e-4);
+  padding-top: var(--e-4);
+  border-top: 1px solid var(--borde-sutil);
+}
+
+/* ==========================================================================
+   3. INSIGNIA / ETIQUETA
+   ========================================================================== */
+.insignia {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-1);
+  padding: 0.2em 0.65em;
+  font-family: var(--fuente-mono);
+  font-size: var(--t-xs);
+  font-weight: var(--peso-medio);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--borde-medio);
+  border-radius: var(--r-full);
+  color: var(--texto-2);
+  background-color: var(--fondo-carta-alt);
+  white-space: nowrap;
+}
+
+.insignia--sanitario {
+  color: var(--c-sanitario-200);
+  border-color: var(--c-sanitario-600);
+  background-color: var(--c-sanitario-900);
+}
+
+.insignia--advertencia {
+  color: var(--c-advertencia-200);
+  border-color: var(--c-advertencia-700);
+  background-color: var(--c-advertencia-900);
+}
+
+.insignia--peligro {
+  color: var(--c-emergencia-200);
+  border-color: var(--c-emergencia-700);
+  background-color: var(--c-emergencia-900);
+}
+
+.insignia--correcto {
+  color: var(--c-correcto);
+  border-color: var(--c-correcto-borde);
+  background-color: var(--c-correcto-fondo);
+}
+
+.insignia--error {
+  color: var(--c-error);
+  border-color: var(--c-error-borde);
+  background-color: var(--c-error-fondo);
+}
+
+.insignia--info {
+  color: var(--c-info);
+  border-color: var(--c-info-borde);
+  background-color: var(--c-info-fondo);
+}
+
+.insignia--neutro {
+  color: var(--texto-3);
+}
+
+/* Punto de estado tipo "LED" de los paneles de control. */
+.punto-estado {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--r-full);
+  background-color: var(--texto-3);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.35);
+}
+
+.punto-estado--activo {
+  background-color: var(--c-correcto);
+}
+.punto-estado--aviso {
+  background-color: var(--c-advertencia-400);
+}
+.punto-estado--alerta {
+  background-color: var(--c-emergencia-400);
+}
+.punto-estado--inactivo {
+  background-color: var(--c-neutro-600);
+}
+
+/* ==========================================================================
+   4. BARRA DE PROGRESO
+   ========================================================================== */
+.progreso {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-2);
+}
+
+.progreso__cabecera {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--e-3);
+  font-size: var(--t-xs);
+  font-family: var(--fuente-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+}
+
+/* Cada elemento tiene un nombre propio y un solo significado:
+     progreso__texto     → la cifra "3 / 10" (texto)
+     progreso__etiqueta  → la palabra "preguntas" (texto)
+     progreso__pista     → el carril (el que lleva role="progressbar")
+     progreso__relleno   → lo lleno, y es lo único con width
+   Mezclar pista y relleno no falla: simplemente no se ve nada. */
+.progreso__texto {
+  color: var(--texto-1);
+  font-weight: var(--peso-fuerte);
+}
+
+.progreso__etiqueta {
+  color: var(--texto-3);
+  font-family: var(--fuente-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.progreso__pista {
+  position: relative;
+  height: 0.5rem;
+  background-color: var(--fondo-hundido);
+  border: 1px solid var(--borde-sutil);
+  border-radius: var(--r-full);
+  overflow: hidden;
+}
+
+.progreso__relleno {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--c-sanitario-500), var(--c-sanitario-300));
+  border-radius: var(--r-full);
+  transition: width var(--trans-lenta);
+}
+
+.progreso__relleno--advertencia {
+  background: linear-gradient(90deg, var(--c-advertencia-500), var(--c-advertencia-300));
+}
+
+.progreso__relleno--peligro {
+  background: linear-gradient(90deg, var(--c-emergencia-600), var(--c-emergencia-400));
+}
+
+.progreso__relleno--correcto {
+  background: linear-gradient(90deg, var(--c-correcto), #6ee7b7);
+}
+
+/* Segmentado: una marca por fase / pregunta (Escape Room, Sprint). */
+.progreso__segmentos {
+  display: flex;
+  gap: var(--e-1);
+}
+
+.progreso__segmento {
+  flex: 1 1 0;
+  height: 0.375rem;
+  background-color: var(--fondo-hundido);
+  border-radius: var(--r-sm);
+  transition: background-color var(--trans-media);
+}
+
+.progreso__segmento--completado {
+  background-color: var(--c-correcto);
+}
+
+.progreso__segmento--fallado {
+  background-color: var(--c-emergencia-500);
+}
+
+.progreso__segmento--actual {
+  background-color: var(--c-advertencia-400);
+  box-shadow: 0 0 0 1px var(--c-advertencia-200);
+}
+
+/* ==========================================================================
+   5. REALIMENTACIÓN (feedback) — el componente pedagógico central
+   Regla de accesibilidad: el color NUNCA es el único indicador.
+   ========================================================================== */
+.realimentacion {
+  display: flex;
+  gap: var(--e-3);
+  padding: var(--e-4);
+  border: 1px solid var(--borde-medio);
+  border-left-width: 4px;
+  border-radius: var(--r-md);
+  background-color: var(--fondo-carta-alt);
+  font-size: var(--t-sm);
+  line-height: var(--interlinea-normal);
+  animation: aparecer-realimentacion calc(var(--trans-media)) both;
+}
+
+.realimentacion__icono {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.1rem;
+}
+
+.realimentacion__cuerpo {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.realimentacion__titulo {
+  font-family: var(--fuente-titulo);
+  font-size: var(--t-sm);
+  font-weight: var(--peso-fuerte);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: var(--e-1);
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+}
+
+.realimentacion__texto {
+  color: var(--texto-2);
+}
+
+.realimentacion__explicacion {
+  margin-top: var(--e-2);
+  padding-top: var(--e-2);
+  border-top: 1px dashed var(--borde-medio);
+  color: var(--texto-3);
+  font-size: var(--t-xs);
+}
+
+.realimentacion--correcto {
+  border-color: var(--c-correcto-borde);
+  border-left-color: var(--c-correcto);
+  background-color: var(--c-correcto-fondo);
+}
+
+.realimentacion--correcto .realimentacion__titulo {
+  color: var(--c-correcto);
+}
+
+.realimentacion--error {
+  border-color: var(--c-error-borde);
+  border-left-color: var(--c-error);
+  background-color: var(--c-error-fondo);
+}
+
+.realimentacion--error .realimentacion__titulo {
+  color: var(--c-error);
+}
+
+.realimentacion--info {
+  border-color: var(--c-info-borde);
+  border-left-color: var(--c-info);
+  background-color: var(--c-info-fondo);
+}
+
+.realimentacion--info .realimentacion__titulo {
+  color: var(--c-info);
+}
+
+@keyframes aparecer-realimentacion {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bloque destacado de "Tenlo en cuenta" (pedagogía del material original). */
+.aviso-clave {
+  display: flex;
+  gap: var(--e-3);
+  padding: var(--e-4);
+  background-color: var(--c-advertencia-900);
+  border: 1px solid var(--c-advertencia-700);
+  border-radius: var(--r-md);
+  font-size: var(--t-sm);
+  color: var(--texto-1);
+}
+
+.aviso-clave__icono {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--c-advertencia-300);
+}
+
+.aviso-clave__titulo {
+  font-family: var(--fuente-titulo);
+  font-size: var(--t-xs);
+  font-weight: var(--peso-fuerte);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-advertencia-200);
+  margin-bottom: var(--e-1);
+}
+
+/* ==========================================================================
+   6. MEDALLAS
+   ========================================================================== */
+.medalla {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  padding: var(--e-2) var(--e-3);
+  background-color: var(--fondo-carta-alt);
+  border: 1px solid var(--borde-medio);
+  border-radius: var(--r-md);
+  font-size: var(--t-xs);
+  color: var(--texto-3);
+}
+
+.medalla--obtenida {
+  color: var(--texto-1);
+  border-color: var(--c-advertencia-600);
+  background-color: var(--c-advertencia-900);
+}
+
+.medalla__icono {
+  width: 1.375rem;
+  height: 1.375rem;
+  flex-shrink: 0;
+}
+
+.medalla--no-obtenida .medalla__icono {
+  opacity: 0.35;
+  filter: grayscale(1);
+}
+
+/* ==========================================================================
+   7. ESTADÍSTICAS
+   ========================================================================== */
+.estadisticas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: var(--e-3);
+}
+
+.estadistica {
+  padding: var(--e-4);
+  background-color: var(--fondo-carta-alt);
+  border: 1px solid var(--borde-sutil);
+  border-radius: var(--r-md);
+  text-align: center;
+}
+
+.estadistica__valor {
+  display: block;
+  font-family: var(--fuente-mono);
+  font-size: var(--t-2xl);
+  font-weight: var(--peso-fuerte);
+  line-height: 1;
+  color: var(--c-sanitario-200);
+}
+
+.estadistica__etiqueta {
+  display: block;
+  margin-top: var(--e-2);
+  font-size: var(--t-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-3);
+}
+
+/* ==========================================================================
+   8. REJILLAS
+   ========================================================================== */
+.rejilla {
+  display: grid;
+  gap: var(--e-4);
+}
+
+.rejilla--2 {
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+}
+.rejilla--3 {
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+.rejilla--4 {
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
+
+/* ==========================================================================
+   9. LISTA DE DEFINICIONES (fichas de estudio)
+   ========================================================================== */
+.ficha {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-2);
+  padding: var(--e-4);
+  background-color: var(--fondo-carta);
+  border: 1px solid var(--borde-sutil);
+  border-left: 3px solid var(--c-sanitario-400);
+  border-radius: var(--r-md);
+}
+
+.ficha__termino {
+  font-family: var(--fuente-titulo);
+  font-size: var(--t-md);
+  font-weight: var(--peso-fuerte);
+  color: var(--texto-1);
+}
+
+.ficha__definicion {
+  font-size: var(--t-sm);
+  color: var(--texto-2);
+}
+
+.ficha__ejemplo {
+  font-size: var(--t-sm);
+  color: var(--texto-3);
+  font-style: italic;
+  padding-left: var(--e-3);
+  border-left: 2px solid var(--borde-medio);
+}
+
+.ficha__etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2);
+  margin-top: var(--e-1);
+}
+
+.ficha--advertencia {
+  border-left-color: var(--c-advertencia-400);
+}
+.ficha--peligro {
+  border-left-color: var(--c-emergencia-500);
+}
+.ficha--correcto {
+  border-left-color: var(--c-correcto);
+}
+
+/* ==========================================================================
+   10. PESTAÑAS (selector de variantes de Memory, etc.)
+   ========================================================================== */
+.pestanas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2);
+  padding: var(--e-1);
+  background-color: var(--fondo-hundido);
+  border: 1px solid var(--borde-sutil);
+  border-radius: var(--r-md);
+}
+
+.pestana {
+  padding: var(--e-2) var(--e-4);
+  font-size: var(--t-sm);
+  font-weight: var(--peso-medio);
+  color: var(--texto-3);
+  border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  transition: color var(--trans-rapida), background-color var(--trans-rapida),
+    border-color var(--trans-rapida);
+}
+
+.pestana:hover {
+  color: var(--texto-1);
+  background-color: var(--borde-sutil);
+}
+
+.pestana[aria-selected='true'] {
+  color: var(--c-neutro-0);
+  background-color: var(--c-sanitario-600);
+  border-color: var(--c-sanitario-300);
+}
+
+/* ==========================================================================
+   11. ESTADO VACÍO
+   ========================================================================== */
+.estado-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--e-3);
+  padding: var(--e-12) var(--e-6);
+  text-align: center;
+  background-color: var(--fondo-carta);
+  border: 1px dashed var(--borde-medio);
+  border-radius: var(--r-lg);
+}
+
+.estado-vacio__icono {
+  width: 3rem;
+  height: 3rem;
+  color: var(--texto-3);
+  opacity: 0.6;
+}
+
+.estado-vacio__texto {
+  max-width: 46ch;
+  color: var(--texto-3);
+  font-size: var(--t-sm);
+}
+
+/* ==========================================================================
+   12. CAJA DE ADVERTENCIA (errores de desarrollo / contenido no disponible)
+   ========================================================================== */
+.caja-error {
+  display: flex;
+  gap: var(--e-3);
+  padding: var(--e-4);
+  background-color: var(--c-error-fondo);
+  border: 1px solid var(--c-error-borde);
+  border-left-width: 4px;
+  border-radius: var(--r-md);
+  font-size: var(--t-sm);
+}
+
+.caja-error__icono {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--c-error);
+}
+
+.caja-error__titulo {
+  font-family: var(--fuente-titulo);
+  font-weight: var(--peso-fuerte);
+  color: var(--c-error);
+  margin-bottom: var(--e-1);
+}
+
+.caja-error__detalle {
+  font-family: var(--fuente-mono);
+  font-size: var(--t-xs);
+  color: var(--texto-2);
+  margin-top: var(--e-2);
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+/* Variante de acierto: la usan los paneles de fin de partida de Memory y
+   Sprint. El color cambia, pero el título y las cifras siguen leyéndose igual,
+   para no depender del color. */
+.caja-error--correcto {
+  background-color: var(--c-correcto-fondo);
+  border-color: var(--c-correcto-borde);
+}
+
+.caja-error--correcto .caja-error__icono,
+.caja-error--correcto .caja-error__titulo {
+  color: var(--c-correcto);
+}
+
+/* Aviso global de error de la aplicación. Se fija arriba para que se vea aunque
+   quien está en clase haya desplazado la pantalla. */
+.aviso-global {
+  position: fixed;
+  inset: var(--e-3) var(--e-3) auto var(--e-3);
+  z-index: 100;
+  box-shadow: var(--sombra-2);
+}
+
+/* ==========================================================================
+   13. DIALOGO MODAL (confirmación de reinicio de progreso, etc.)
+   ========================================================================== */
+dialog.modal {
+  width: min(30rem, calc(100vw - 2rem));
+  padding: var(--e-6);
+  background-color: var(--fondo-panel);
+  color: var(--texto-2);
+  border: 1px solid var(--borde-medio);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sombra-lg);
+}
+
+dialog.modal::backdrop {
+  background-color: rgba(2, 12, 20, 0.72);
+  backdrop-filter: blur(2px);
+}
+
+.modal__titulo {
+  font-size: var(--t-lg);
+  margin-bottom: var(--e-3);
+}
+
+.modal__texto {
+  font-size: var(--t-sm);
+  margin-bottom: var(--e-5);
+}
+
+.modal__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--e-3);
+}
