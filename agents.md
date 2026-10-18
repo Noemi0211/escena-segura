@@ -373,4 +373,6 @@ recorrido en navegador con los cuatro 403):
 
 Pendiente:
 
-- Push a GitHub (falta crear el remoto; ningún remoto configurado todavía).
+- Ninguno abierto en esta sesión. El push se hizo el 2026-10-18:
+  https://github.com/Noemi0211/escena-segura (pública, rama `master`).
+  `git status --porcelain` limpio; el material privado no está en el historial.
