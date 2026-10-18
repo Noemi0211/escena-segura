@@ -430,7 +430,7 @@
   color: #17231f;
   transform: rotateY(180deg);
   padding: 0.3rem;
-  font-size: clamp(0.58rem, 0.8vw, 0.72rem);
+  font-size: clamp(0.7rem, 0.95vw, 0.875rem);
   line-height: 1.08;
   font-weight: var(--peso-medio);
   overflow-wrap: anywhere;
@@ -485,7 +485,7 @@
   top: 0.4rem;
   left: 0.5rem;
   font-family: var(--fuente-mono);
-  font-size: clamp(0.42rem, 0.9vw, 0.5625rem);
+  font-size: clamp(0.5rem, 0.9vw, 0.65rem);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #26332f;
@@ -772,6 +772,21 @@
   .carta-memory__cara {
     padding: var(--e-2);
     font-size: var(--t-xs);
+  }
+
+  /* Texto del anverso: en móvil el clamp base se quedaba en 0.58rem porque
+     0.8vw de un móvil es casi nada; aquí manda el ancho de la pantalla. */
+  .carta-memory__cara--anverso {
+    font-size: clamp(1rem, 3.6vw, 1.2rem);
+    line-height: 1.12;
+  }
+
+  .carta-memory__tipo {
+    font-size: 0.6rem;
+  }
+
+  .carta-memory__cara--dorso span {
+    font-size: 0.75rem;
   }
 
   .fase-escape {
