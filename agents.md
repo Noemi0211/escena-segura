@@ -376,3 +376,23 @@ Pendiente:
 - Ninguno abierto en esta sesión. El push se hizo el 2026-10-18:
   https://github.com/Noemi0211/escena-segura (pública, rama `master`).
   `git status --porcelain` limpio; el material privado no está en el historial.
+
+### 7.13 Memory en móvil y despliegue en Pages (2026-10-18)
+
+El proyecto está publicado en GitHub Pages desde el mismo repo
+(pestaña «Pages» de GitHub; no hay build, se sirve la raíz). Ajustes hechos
+tras verlo en un móvil real:
+
+- **Texto del anverso de Memory en móvil.** El fallo: el `clamp()` base del
+  anverso (`0.58rem, 0.8vw, 0.72rem`) caía siempre al mínimo en móvil, porque
+  `0.8vw` de una pantalla de teléfono son casi 3px: la letra salía de ~9px.
+  Solución en `src/styles/juegos.css`: en `@media (max-width: 48rem)` el
+  anverso fija `clamp(1rem, 3.6vw, 1.2rem)` y suben también `.carta-memory__tipo`
+  y el texto del dorso; el clamp de escritorio sube a `0.7rem–0.875rem`.
+  Regla práctica: **en móvil el tamaño de letra no se escala con `vw` de la
+  pantalla**, se fija en el media query; `vw` solo sirve como techo.
+- Aceptado por la autora tal cual («así se queda»). Si en el futuro se
+  quisiera letra aún mayor: pasar a 3 columnas en móvil normal (hoy solo en
+  `max-width: 24rem`), no seguir subiendo el `clamp`.
+- `npm run verificar` en verde tras los cambios. Commits: `d7f6774` (fuente),
+  `515c6f3` (revision-contenido.md fuera), `bea0076` (cierre de §7.12).
