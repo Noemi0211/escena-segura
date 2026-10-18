@@ -364,11 +364,13 @@ recorrido en navegador con los cuatro 403):
 - **README**: cifra correcta (88), fila de `npm run generar:pdf`,
   `preguntas-y-respuestas/` en la estructura y errata «Decládalo» corregida.
 
+- **Repositorio inicializado (2026-10-18).** `git init` + commit raíz
+  `37af573` con 64 ficheros. Índice verificado: `_privado-NoemiCelaya/`,
+  `preguntas-y-respuestas/` y `*.docx` no entran (`.gitignore` §6 y §7.11).
+- **`revision-contenido.md` NO se publica**: se quitó del índice y va en
+  `.gitignore` como material de trabajo (§6). Las referencias que hay a él en
+  este documento valen para quien mantiene, que dispone del fichero en local.
+
 Pendiente:
 
-- `git init` + primer commit + push a GitHub. Al inicializar, comprobar que
-  `_privado-NoemiCelaya/` y `preguntas-y-respuestas/` no entran en el índice
-  (`git status --porcelain` no debe listarlas).
-- Decidir si `revision-contenido.md` se publica. Hoy se da por publicable:
-  `README.md` y `agents.md` lo citan como documentación del proyecto y no
-  contiene material de trabajo, solo decisiones de contenido.
+- Push a GitHub (falta crear el remoto; ningún remoto configurado todavía).

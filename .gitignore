@@ -15,6 +15,10 @@ _privado-NoemiCelaya/
 # de corrección: se generan en local cuando hacen falta, pero no se publican.
 preguntas-y-respuestas/
 
+# La sesión de revisión de contenido es material de trabajo de la autoría:
+# decisiones y erratas internas, no documentación publicable del proyecto.
+revision-contenido.md
+
 # Aviso: los ficheros que SÍ se publican viven en src/assets/.
 # Si alguna vez se copia material de trabajo a src/, se detecta aquí.
 
